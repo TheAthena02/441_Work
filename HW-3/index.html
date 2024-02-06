@@ -1,0 +1,108 @@
+<html>
+    <head>
+        <title>Choose Your Own Adventure</title>
+        
+        <link rel="stylesheet" href="./style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Protest+Strike&display=swap" rel="stylesheet">
+    </head>
+    
+    <body>
+        <h1>Choose Your Own Adventure</h1>
+        <div id="mainbody">
+        <img src="./images/corridor.jpg">
+        <p>You walk down a dark coridor. In front of you is two weapons on the ground. With your missing left arm, you can only carry one. Do you carry:</p>
+        <button id="option" onclick="isClicked(1);">Rusty Hook</button> <br>
+        <button id="option" onclick="isClicked(2);">David's Sling</button>
+    </div>
+        <script></script>
+        <script>
+        var optionInput = 0;
+        var currentPage = 0;
+        var promptname = prompt("Enter your name", "Name");
+        var username = null;
+
+        if (promptname != null) {
+            username = promptname;
+        }
+        //document.write(username);
+        
+        function handleCase1(){
+            console.log(1);
+            document.getElementById("mainbody").innerHTML = `<img src="./images/rustyhook.png" style="width: 300px;"> <br>
+            As soon as you touch the hook, you are transported to another time and place. You stand in front of a restuarant in what seems like florida. Next to you, a phone rings.<br>
+            <button id="option" onclick="isClicked(3);">Go inside</button><br>
+            <button id="option" onclick="isClicked(4);">Pick up the phone</button><br>`;
+            currentPage = 1;
+        }
+        function handleCase2(){
+            document.getElementById("mainbody").innerHTML = '<img src="./images/goliath.png" style="width: 300px;"> <br>' +
+            'You are teleported to the battle between david and goliath. Goliath speaks to you. "Well hello, ' + username + ', are you ready for our battle? <br>' +
+            '<button id="option" onclick="isClicked(5);">"Yes"</button><br>' +
+            '<button id="option" onclick="isClicked(6);">"No"</button>';
+            currentPage = 2;
+        }
+        function handleCase3(){
+            document.getElementById("mainbody").innerHTML = `You go inside and have a lovely steak dinner. The End!`
+            ;
+            currentPage = 3;
+        }
+        function handleCase4(){
+            document.getElementById("mainbody").innerHTML = `You pick up the phone. The voice on the other end tells you an ultimatum, you can either go back to where you were and your normal life, or you can have 200 million dollars, but you live in the current year. Which do you choose?
+            <br><button id="option" onclick="isClicked(7);">Return to your normal life</button><br>
+            <button id="option" onclick="isClicked(8);">200 Million Dollars</button>`;
+            currentPage = 4;
+        }
+        function handleCase5(){
+            document.getElementById("mainbody").innerHTML = `You fight goliath. You realize because of your one arm, you cannot load the sling. Goliath pulverizes you. The End!`;
+            currentPage = 5;
+        }
+        function handleCase6(){
+            document.getElementById("mainbody").innerHTML = `You flee the battle, but are attacked by the troops and die. The End!`;
+            currentPage = 6;
+        }
+        function handleCase7(){
+            document.getElementById("mainbody").innerHTML = "You return home to your friends and family, who embrace you happily. The End!";
+            currentPage = 7;
+        }
+        function handleCase8(){
+            document.getElementById("mainbody").innerHTML = "A case full of money appears in front of you. However, as soon as you look over at the sign at the restuarant, you realize you are in the future, and inflation has made money worthless. You have the equivalent of 200 dollars in today's money, and everyone you've ever met is dead. The End!";
+            currentPage = 8;
+        }
+        function executeSwitch() {
+            switch(optionInput) {
+            case 1:
+                handleCase1();
+                break;
+            case 2:
+                handleCase2();
+                break;
+            case 3:
+                handleCase3();
+                break;
+            case 4:
+                handleCase4();
+                break;
+            case 5:
+                handleCase5();
+                break;
+            case 6:
+                handleCase6();
+                break;
+            case 7:
+                handleCase7();
+                break;
+            case 8:
+                handleCase8();
+                break;
+        }
+
+        }
+        function isClicked(optionNumber) {
+            optionInput = optionNumber;
+            executeSwitch();
+        }  
+        </script>
+    </body>
+</html>
