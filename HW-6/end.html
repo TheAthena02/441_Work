@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Summary</title>
+</head>
+<body onload="pleaseWork();">
+    <div id="userInfo">
+        <p id="name"></p>
+        <p id="age"></p>
+        <p id="attempts"></p>
+        <button id="btnReset" onclick="btnReset();">Reset</button>
+    </div>
+
+
+    <script>
+        var playerInfo = JSON.parse(localStorage.getItem("playerInfo"));
+        console.log(playerInfo.firstname);
+        var score = JSON.parse(localStorage.getItem("score"));
+        // Display the user information
+        document.getElementById('name').textContent = `Name: ${playerInfo.firstname} ${playerInfo.lastname}`;
+        document.getElementById('age').textContent = `Age: ${playerInfo.age}`;
+        document.getElementById('attempts').textContent = `Attempts: ${score}`;
+    
+        function btnReset() {
+            localStorage.clear();
+            window.location = "start.html";
+        }
+    </script>
+</body>
+</html>
