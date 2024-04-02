@@ -5,10 +5,109 @@
     <meta charset="utf-8">
     <title>jQuery</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./libs/jquery.min.js"></script>
+
+    <script>
+        let imgArr = ['./images/cat_1.png', './images/cat_2.png', './images/cat_3.png'];
+        let wordArr = ['I like to eat meat' , 'Um Um guys we are cooked, its so jover' , 'You know who else is strange?'];
+        var imgCounter = 0;
+        var textCounter = 0;
+        $(function () {
+            new function imgChange() {
+                
+                document.getElementById("image").src = imgArr[imgCounter];
+                if (imgCounter == imgArr.length-1) {
+                    imgCounter = 0;
+                }
+                else {
+                    imgCounter++;
+                }
+                $("#image").fadeIn("slow").delay(1500).fadeOut("slow", function() { 
+                    imgChange();
+                })
+
+            }
+            new function textChange() {
+                
+                $("#text").text(wordArr[textCounter]).fadeIn("slow").delay(1000).fadeOut("slow", function() {
+                    if(textCounter == wordArr.length - 1) {
+                        textCounter = 0;
+                }
+                    else{
+                        textCounter++;
+                }
+                textChange();
+                })
+            }
+
+           
+                
+            new function circleMove() {
+                $(".circle").fadeIn("slow").animate({right: '250px'},800).fadeOut("slow").animate({left: '250px'}, function() {
+                    $(".triangle").fadeIn("slow").animate({right: '250px'},800).fadeOut("slow").animate({left: '250px'}, function() {
+                        $(".square").fadeIn("slow").animate({right: '250px'},800).fadeOut("slow").animate({left: '250px'}, function() {
+                            circleMove();
+                        }
+                        )
+                    }
+                    )
+                }
+                )
+            }  
+    
+    
+        })
+
+    </script>
+
 
 <style>
+    
     html {
         background-color: black;
+    }
+    .container{
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding-left: 20%;
+    }
+    img {
+        width: 50%;
+        left: 10%; 
+    }
+    p {
+        position: absolute;
+        top: 10%;
+        left: 20%;
+        text-align: center;
+        color: white;
+        font-size: 200%;
+        
+    }
+    .triangle {
+        width: 0;
+        height: 0;
+        border-left: 25px solid transparent;
+        border-right: 25px solid transparent;
+        border-bottom: 50px solid #555;
+        position: absolute;
+        top: 40%;
+    }
+    .circle {
+        height: 50px;
+        width: 50px;
+        background-color: #555;
+        border-radius: 50%;
+        position: absolute;
+        top: 40%;
+    }
+    .square {
+        height: 50px;
+        width: 50px;
+        background-color: #555;
+        position: absolute;
+        top: 40%;
     }
         
 </style>
@@ -19,12 +118,17 @@
     
     <div class="container">
 
+        <img src="" id="image" style="display:none;">
+        <p id="text" style="display:none;"></p>
+        <div class="circle" style="display:none;"></div>
+        <div class="triangle" style="display:none;"></div>
+        <div class="square" style="display:none;"></div>
     </div>
 
     
-    <script src="./libs/jquery.min.js"></script>
     
-    <script src="script.js"></script>
+    
+    
 
 </body>
 </html>
