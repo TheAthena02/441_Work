@@ -1,0 +1,3 @@
+## Homework 9
+
+When scrolling through the data collections, my eyes were immediately drawn to the pokemon information. I had the idea for a pokedex right away. I created a simple system that allows the user to scroll through the pokedex, as well as look up the pokemon with their id. I included some simple information, like their name, type, as well as an image of them. I also included their next and previous evolutions with a picture as well. I'd like to come back to this to add more to the visuals as well as a way to see more information about each pokemon.

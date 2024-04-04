@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="./libs/jquery.min.js"></script>
+    <style>
+        body{
+            width: 100vw;
+            height: 100vh;
+            font-family: "Oxygen", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+        
+        #pokedex {
+            background-color: beige;
+            margin: auto;
+            width: 50%;
+            height: 50vh;
+            text-align: center;
+        }
+        #title {
+            text-align: center;
+            font-family: "Oxygen", sans-serif;
+            font-weight: 700;
+            font-style: normal;
+            
+        }
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            
+        }
+        
+        #prevNext {
+            margin: auto;
+            padding: 2rem 2rem;
+            text-align: center;
+            width: 50%;
+            display: flex;
+        }
+        #prevImg, #nextImg {
+            
+            justify-content: center;
+            
+        }
+        #prevCont, #nextCont {
+            
+            flex: 1;
+            
+            margin: 10px;
+        }
+
+        #arrowBox {
+            display: block;
+            margin: auto;
+            width: 10%;
+            text-align: center;
+        }
+        
+
+
+    </style>
+    <script>
+        var selectId = 0;
+        (function($){
+        $.fn.update = function () {
+            $.getJSON("./data/pokedex.json", function(data) {
+                console.log(data.pokemon[selectId]);
+                var currentId = data.pokemon[selectId];
+                $("#num").text(currentId.num);
+                $("#name").text(currentId.name);
+                $("#img").html('<img src="' + currentId.img + '">');
+
+                if(currentId.type.length > 1) {
+                    $("#type").text(currentId.type[0] + ", " + currentId.type[1]);
+
+                }
+                else{
+                    $("#type").text(currentId.type);
+                }
+                if(currentId.hasOwnProperty('prev_evolution')) {
+                    var prev = currentId.prev_evolution[(currentId.prev_evolution.length-1)].num;
+                    var imageIndex = parseInt(prev) - 1;
+
+                    $("#prevImg").html('<img src="' + data.pokemon[imageIndex].img + '">').show();
+
+
+                    $("#prev").html('Previous Evolution:' + '<br>' + currentId.prev_evolution[(currentId.prev_evolution.length-1)].name).show();
+                    console.log(imageIndex);
+                    
+                }
+                else {
+                    
+                    $("#prev").text("default").hide();
+                    $("#prevImg").html("<img src='http://www.serebii.net/pokemongo/pokemon/001.png'>").hide();
+                }
+                if(currentId.hasOwnProperty('next_evolution')) {
+                    var next = currentId.next_evolution[0].num;
+                    var imageIndex = parseInt(next) - 1;
+
+                    $("#nextImg").html('<img src="' + data.pokemon[imageIndex].img + '">').show();
+
+
+                    $("#next").html('Next Evolution:' + '<br>' + currentId.next_evolution[0].name).show();
+                    console.log(data.pokemon[imageIndex].img);
+                    
+                }
+                else {
+                    
+                    $("#next").text("default").hide();
+                    $("#nextImg").html("<img src='http://www.serebii.net/pokemongo/pokemon/001.png'>").hide();
+                }
+            });
+            
+            return this;
+        };
+        }(jQuery));
+        $(function () {
+            $("pokedex").update();
+            
+
+            $("#leftArrow").click(function() {
+                if(selectId > 0) {
+                    selectId -=1;
+                }
+                else {
+                }
+                
+                $("#pokedex").update();
+
+            })
+            $("#rightArrow").click(function() {
+                if(selectId < 150) {
+                    selectId +=1;
+                }
+                else {
+                }
+                $("#pokedex").update();
+
+            })
+
+            $("#submit").click(function() {
+                $("input").val(function(i, input) {
+                    //clamp
+                    selectId = Math.min(Math.max(input-1, 0), 150);
+                    $("#pokedex").update();
+
+                })
+            })
+
+        })
+
+        
+    </script>
+</head>
+<body>
+
+    
+    <div id="pokedex">
+        <div id="title"><h1>Pokedex</h1></div>
+        <div id="num"></div>
+        <div id="name"></div>
+        <div id="img"><img src=""></div>
+        <div id="type"></div>
+        <div id="prevNext">
+            <div id="prevCont">
+                <div id="prev"></div>
+                <div id="prevImg"><img src=""></div>
+        </div>
+            <div id="nextCont">
+                <div id="next"></div>
+                <div id="nextImg"><img src=""></div>
+        </div>
+        </div>
+    </div>
+    <div id="arrowBox">
+    <button id="leftArrow">&lt;--</button>
+    <input type="number" min="0" max="151" placeholder="0 - 151">
+    <button id="submit">Go To</button>
+    <button id="rightArrow">--&gt;</button>
+    </div>
+</body>
+</html>
