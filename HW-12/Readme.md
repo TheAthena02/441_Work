@@ -1,0 +1,2 @@
+### Homework 12
+This homework was surprisingly difficult. I got caught up in trying to implement a way for the player to be blocked from moving into the objects while still moving in the other directions. Then I realized it was still accurate to the directions to have the player freeze in place. I had some issues getting JSON to work, but I realized I just had to put the jquery selector at the bottom of the code. not really sure why, I assumed it had to be first.

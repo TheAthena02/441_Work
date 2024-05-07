@@ -1,0 +1,177 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>My first three.js app</title>
+        <style>
+            body { margin: 0; }
+            canvas { display: block; }
+        </style>
+    </head>
+    <body>
+      <script src="./three.min.js"> </script>
+      <script src="GLTFLoader.js"></script>
+      <script src="TrackballControls.js"></script>
+        <script>
+            
+  let example = new THREE.Object3D();
+  var scene = getScene();
+  var cube = new THREE.Object3D();
+  var cylinder = new THREE.Object3D();
+
+
+  var text = "aems",
+        height = 2,
+        size = 10,
+        curveSegments = 10,
+        bevelThickness = 1,
+        bevelSize = 0.3,
+        bevelSegments = 3,
+        bevelEnabled = true,
+        font = undefined;
+  
+
+  function getScene() {
+    var scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x111111);
+    return scene;
+  }
+
+  function getCamera() {
+    var aspectRatio = window.innerWidth / window.innerHeight;
+    var camera = new THREE.PerspectiveCamera(75, aspectRatio, 0.1, 1000);
+    camera.position.set(0, 90, -10);
+    return camera;
+  }
+
+ 
+
+  function getLight(scene) {
+    var light = new THREE.PointLight(0xffffff, 1, 0);
+    light.position.set(30, 50, 30);
+    scene.add(light);
+
+    var light1 = new THREE.PointLight(0xffffff, 1, 0);
+    light1.position.set(-30, 50, -30);
+    light.add(light1);
+
+    var ambientLight = new THREE.AmbientLight(0x111111);
+    scene.add(ambientLight);
+    return light;
+  }
+
+  /**
+  * Generate the renderer to be used in the scene
+  **/
+
+  function getRenderer() {
+    // Create the canvas with a renderer
+    var renderer = new THREE.WebGLRenderer({antialias: true});
+    // Add support for retina displays
+    renderer.setPixelRatio(window.devicePixelRatio);
+    // Specify the size of the canvas
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    // Add the canvas to the DOM
+    document.body.appendChild(renderer.domElement);
+    return renderer;
+  }
+
+  /**
+  * Generate the controls to be used in the scene
+  * @param {obj} camera: the three.js camera for the scene
+  * @param {obj} renderer: the three.js renderer for the scene
+  **/
+
+  function getControls(camera, renderer) {
+    var controls = new THREE.TrackballControls(camera, renderer.domElement);
+    controls.zoomSpeed = 0.4;
+    controls.panSpeed = 0.4;
+    controls.rotateSpeed = 10;
+    return controls;
+  }
+
+  /**
+  * Load Skull model
+  **/
+
+  function loadModel() {
+    var loader = new THREE.GLTFLoader();
+    
+    loader.load( './models/rouge1.gltf', function ( object ) {
+      
+      example = object.scene;
+      example.material;
+      example.rotation.x = Math.PI/2;
+      example.rotation.y = Math.PI;
+
+      scene.add(example);
+      //document.querySelector('h1').style.display = 'none';
+    },
+	// called while loading is progressing
+	function ( xhr ) {
+
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+	},
+	// called when loading has errors
+	function ( error ) {
+
+		console.log( 'An error happened' );
+
+	}
+); 
+  }
+
+
+  function cubeB() {
+    
+    var geometry = new THREE.BoxGeometry(10, 10, 1);
+        var material = new THREE.MeshBasicMaterial({
+        color: 0x00ff00
+        });
+    cube = new THREE.Mesh(geometry, material);
+    return cube;
+    
+  }
+  function cylinderB() {
+    var geometry = new THREE.CylinderGeometry( 10, 10, 3, 32); 
+    var material = new THREE.MeshBasicMaterial( {color: 0xffff00} ); 
+    cylinder = new THREE.Mesh( geometry, material ); 
+    cylinder.rotation.x = Math.PI /2;
+    cylinder.position.set(0, 0, -3);
+    return cylinder;
+  }
+    function buildScene() {
+        var cube = cubeB();
+        var cylinder = cylinderB();
+        scene.add( cube );
+        scene.add(cylinder);
+
+    }
+    
+   
+    
+
+  /**
+  * Render!
+  **/
+
+  function render() {
+    requestAnimationFrame(render);
+    cube.rotation.z += .01;
+    example.rotation.y += .01;
+    renderer.render(scene, camera);
+    controls.update();
+  };
+
+  
+  var camera = getCamera();
+  var light = getLight(scene);
+  var renderer = getRenderer();
+  var controls = getControls(camera, renderer);
+  buildScene();
+  loadModel();
+
+  render();
+        </script>
+    </body>
+</html>

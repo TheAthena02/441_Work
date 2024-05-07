@@ -1,0 +1,2 @@
+### Homework 14
+This homework was very frustrating. I found the documentation for three.js to be lacking, though I was able to find quite a bit on stack overflow. I spent a lot of time trying to get my model to work, but because I chose a ripped game model instead of something more professional, it was hard to work with. I struggled to get things to look right. I understand the purpose of webbased 3d, however I find it too tedious and hard to understand.
