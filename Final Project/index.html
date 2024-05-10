@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HTML5 canvas</title>
+        <link rel="stylesheet" href="./libs/jquery-ui.min.css">
+        <script src="./libs/jquery.min.js"></script>
+        <script src="./libs/jquery-ui.min.js"></script>
+        
+        
+        <style>
+
+            #pointSlider {
+                margin: 10px;
+            }
+            .slider {
+                margin: 10px;
+            }
+            #myCanvas {
+                border-width: 10px;
+                border-color: black;
+            }
+            
+        </style>
+    </head>
+
+    <body>
+        
+        <h1>Attribute Chart Generator</h1>
+        <h3>Input Title</h3>
+        <input type="text" placeholder="Title"id="title">
+        <h3>Chose amount of Points (3-8)</h3>
+        <div id="sliderBlock">
+            <!--Point Select-->
+            <div id="pointSlider"></div>
+            <!--General Slider - these will be visible according to how many points have been selected-->
+            
+            <div id="section1" style="display: none;">
+                <h3>Assign Atributes</h3>
+                <div id="slider1" class="slider" ></div>
+                <input type="text" placeholder="Atribute"class="text" id="input1"> 
+                <div id="value1">1</div>
+            </div>
+            <div id="section2"  style="display: none;">
+                <div id="slider2" class="slider"></div>
+                <input type="text" placeholder="Atribute"class="text"id="input2">
+                <div id="value2">1</div>
+            </div>
+            <div id="section3"  style="display: none;">
+                <div id="slider3" class="slider"></div>
+                <input type="text" placeholder="Atribute"class="text"id="input3">
+                <div id="value3">1</div>
+                </div>
+            <div id="section4"  style="display: none;">
+                <div id="slider4" class="slider"></div>
+                <input type="text" placeholder="Atribute"class="text"id="input4">
+                <div id="value4">1</div>
+            </div>
+            <div id="section5"  style="display: none;">
+                <div id="slider5" class="slider"></div>
+                <input type="text" placeholder="Atribute"class="text"id="input5">
+                <div id="value5">1</div>
+                </div>
+            <div id="section6"  style="display: none;">
+                <div id="slider6" class="slider"></div>
+                <input type="text" placeholder="Atribute"class="text"id="input6">
+                <div id="value6">1</div>
+                </div>
+            <div id="section7"  style="display: none;">
+                <div id="slider7" class="slider"></div>
+                <input type="text" placeholder="Atribute"class="text"id="input7">
+                <div id="value7">1</div>
+                </div>
+            <div id="section8"  style="display: none;">
+                <div id="slider8" class="slider"></div>
+                <input type="text" placeholder="Atribute"class="text"id="input8">
+                <div id="value8">1</div>
+                </div>
+        </div>
+
+
+        <canvas id="myCanvas" height="600" width="800"></canvas>
+
+
+
+        <script src="script.js"></script>
+    
+    </body>
+</html>
